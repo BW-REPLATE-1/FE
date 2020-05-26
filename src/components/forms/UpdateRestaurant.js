@@ -5,11 +5,11 @@ import styled from "styled-components";
 
 function UpdateRestaurant() {
 	const [restaurantData, setRestaurantData] = useState({
-		company: "Panera",
-		contact: "Jim",
-		email: "email@email.com",
-		location: "123 someplace rd, someplace ca 25404",
-		id: Date.now()
+		company: "",
+		contact: "",
+		email: "",
+		location: "",
+		id: ""
 	});
 	const { register, handleSubmit, errors } = useForm();
 	const onSubmit = data => setRestaurantData(data);
