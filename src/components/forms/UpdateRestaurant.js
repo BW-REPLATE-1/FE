@@ -1,47 +1,66 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 function UpdateRestaurant() {
-	const [restaurantData, setRestaurantData] = useState({
-		company: "Panera",
-		contact: "Jim",
-		email: "email@email.com",
-		location: "123 someplace rd, someplace ca 25404",
-		id: Date.now()
-	});
-	const { register, handleSubmit, errors } = useForm();
-	const onSubmit = data => setRestaurantData(data);
+  const [restaurantData, setRestaurantData] = useState({
+    company: "Panera",
+    contact: "Jim",
+    email: "email@email.com",
+    location: "123 someplace rd, someplace ca 25404",
+    id: Date.now(),
+  });
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = (data) => setRestaurantData(data);
 
-	useEffect(() => {
-		console.log(restaurantData)
-	}, [handleSubmit(onSubmit)])
-	
+  useEffect(() => {
+    console.log(restaurantData);
+  }, [handleSubmit(onSubmit)]);
 
+  // useEffect(() => {
+  // 	axiosWithAuth()
+  // 		.get("/restaurant")
+  // 		.then((res) => {
+  // 			setRestaurantData(res.data);
+  // 		});
+  // }, []);
 
-	// useEffect(() => {
-	// 	axiosWithAuth()
-	// 		.get("/restaurant")
-	// 		.then((res) => {
-	// 			setRestaurantData(res.data);
-	// 		});
-	// }, []);
+  return (
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          type="text"
+          placeholder={restaurantData.company}
+          name="Company"
+          ref={register({ required: true, maxLength: 80 })}
+        />
+        <input
+          type="text"
+          placeholder={restaurantData.contact}
+          name="Contact"
+          ref={register({ required: true, maxLength: 80 })}
+        />
+        <input
+          type="text"
+          placeholder={restaurantData.email}
+          name="Email"
+          ref={register({ required: true, pattern: /^\S+@\S+$/i })}
+        />
+        {errors.Email && (
+          <span>This Field is Required and use example@example.com format</span>
+        )}
+        <input
+          type="text"
+          placeholder={restaurantData.location}
+          name="Location"
+          ref={register({ required: true, maxLength: 80 })}
+        />
 
-
-	return (
-		<>
-			<form onSubmit={handleSubmit(onSubmit)}>
-			<input type="text" placeholder={restaurantData.company} name="Company" ref={register({required: true, maxLength: 80})} />
-			<input type="text" placeholder={restaurantData.contact} name="Contact" ref={register({required: true, maxLength: 80})} />
-			<input type="text" placeholder={restaurantData.email} name="Email" ref={register({required: true, pattern: /^\S+@\S+$/i})} />
-			{errors.Email && <span>This Field is Required and use example@example.com format</span>}
-			<input type="text" placeholder={restaurantData.location} name="Location" ref={register({required: true, maxLength: 80})} />
-
-			<input type="submit" />
-			</form>
-		</>
-	);
+        <input type="submit" />
+      </form>
+    </>
+  );
 }
 
 export default UpdateRestaurant;
