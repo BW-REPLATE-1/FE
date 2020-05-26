@@ -3,24 +3,26 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
-function UpdateVolunteer() {
-  const [volunteerData, setVolunteerData] = useState({
+function UpdateRestaurant() {
+  const [restaurantData, setRestaurantData] = useState({
+    company: "Panera",
     contact: "Jim",
     email: "email@email.com",
+    location: "123 someplace rd, someplace ca 25404",
     id: Date.now(),
   });
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data) => setVolunteerData(data);
+  const onSubmit = (data) => setRestaurantData(data);
 
   useEffect(() => {
-    console.log("volunteer", volunteerData);
+    console.log(restaurantData);
   }, [handleSubmit(onSubmit)]);
 
   // useEffect(() => {
   // 	axiosWithAuth()
-  // 		.get("/volunteer")
+  // 		.get("/restaurant")
   // 		.then((res) => {
-  // 			setVolunteerData(res.data);
+  // 			setRestaurantData(res.data);
   // 		});
   // }, []);
 
@@ -29,19 +31,31 @@ function UpdateVolunteer() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
-          placeholder={volunteerData.contact}
+          placeholder={restaurantData.company}
+          name="Company"
+          ref={register({ required: true, maxLength: 80 })}
+        />
+        <input
+          type="text"
+          placeholder={restaurantData.contact}
           name="Contact"
           ref={register({ required: true, maxLength: 80 })}
         />
         <input
           type="text"
-          placeholder={volunteerData.email}
+          placeholder={restaurantData.email}
           name="Email"
           ref={register({ required: true, pattern: /^\S+@\S+$/i })}
         />
         {errors.Email && (
           <span>This Field is Required and use example@example.com format</span>
         )}
+        <input
+          type="text"
+          placeholder={restaurantData.location}
+          name="Location"
+          ref={register({ required: true, maxLength: 80 })}
+        />
 
         <input type="submit" />
       </form>
@@ -49,4 +63,4 @@ function UpdateVolunteer() {
   );
 }
 
-export default UpdateVolunteer;
+export default UpdateRestaurant;

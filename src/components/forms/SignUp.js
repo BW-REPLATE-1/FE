@@ -51,7 +51,7 @@ let Submit = styled.input`
   transition: 0.5s;
 
   &:hover {
-    background: blue;
+    background: #e79898;
     color: white;
   }
 `;
@@ -177,6 +177,24 @@ let SignUpForm = () => {
               })}
             ></Fields>
             {errors.password && <Err>⚠ Password is Required</Err>}
+          </label>
+        </InputSpacer>
+
+        <InputSpacer>
+          <label>
+            Address:
+            <br />
+            <Fields
+              id="pass"
+              type="text"
+              name="address"
+              placeholder="Your address"
+              // Password (UpperCase, LowerCase and Number)
+              ref={register({
+                required: true,
+              })}
+            ></Fields>
+            {errors.address && <Err>⚠ Address is Required</Err>}
           </label>
         </InputSpacer>
 
