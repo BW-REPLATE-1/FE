@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 // import axios from "axios";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
-import { waitForDomChange } from "@testing-library/react";
+import { axiosWithAuth } from "../../util/axiosWithAuth";
 
 const Form = styled.form`
   font-size: 2em;
@@ -66,10 +66,24 @@ let Err = styled.p`
 //   justify-content: space-between;
 // `;
 
+
+
 let SignUpForm = () => {
+  const [registerState, setRegisterState] = useState({
+    username: "",
+      password: "",
+      email: "",
+      phone_number: 5554443333,
+      isBusiness: true
+  })  
   let { register, handleSubmit, errors } = useForm();
   let onSubmit = (userData) => {
     console.log(userData);
+    setRegisterState(userData)
+    axiosWithAuth()
+      .post('/register', registerState)
+      .then(res => console.log('reg axios', res))
+      .catch(err => console.log('axios reg err', err))
   };
 
   return (
@@ -152,7 +166,7 @@ let SignUpForm = () => {
             <br />
             <Fields
               id="phone"
-              type="number"
+              type="tel"
               name="phone_number"
               placeholder="Your Phone Number"
               ref={register({ required: true })}
@@ -180,7 +194,7 @@ let SignUpForm = () => {
           </label>
         </InputSpacer>
 
-        <InputSpacer>
+        {/* <InputSpacer>
           <label>
             Address:
             <br />
@@ -196,7 +210,7 @@ let SignUpForm = () => {
             ></Fields>
             {errors.address && <Err>⚠ Address is Required</Err>}
           </label>
-        </InputSpacer>
+        </InputSpacer> */}
 
         {/* <label>
         ReEnter Password:
