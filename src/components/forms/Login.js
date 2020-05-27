@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm, ErrorMessage } from "react-hook-form";
 import styled from 'styled-components';
+import { axiosWithAuth } from '../../util/axiosWithAuth';
 
 const Form = styled.form`
   font-size: 2em;
@@ -46,6 +47,15 @@ let Login = () => {
   let { register, handleSubmit, errors, watch } = useForm();
   let onSubmit = (userData) => {
     console.log(userData);
+    axiosWithAuth()
+      .post('/login', userData)
+      .then((res) => {
+				console.log("res ", res);
+				localStorage.setItem("token", res.data.token);
+				// props.history.push("/");
+			})
+      .catch(err => console.log('axios login err', err))
+      .finally(() => window.location.reload())
   };
 
   return (
@@ -53,16 +63,16 @@ let Login = () => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h1>Sign In</h1>
         <label>
-          Email:
+          Username:
           <br />
           <Fields
-            id="email"
-            type="email"
-            name="email"
-            placeholder="Enter Your Email"
+            id="username"
+            type="text"
+            name="username"
+            placeholder="Enter Your Username"
             ref={register({required: true})}
           ></Fields>
-          {errors.email && <Err>⚠ Email is Required</Err>}
+          {errors.email && <Err>⚠ Username is Required</Err>}
         </label>
         <label>
           Password:
