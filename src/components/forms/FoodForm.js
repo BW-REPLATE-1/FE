@@ -62,6 +62,7 @@ let FoodForm = () => {
   return (
     <container>
       <Form onSubmit={handleSubmit(onSubmit)}>
+        <h2>Submit Pickup</h2>
         <label>
           Food Type:
           <br />
