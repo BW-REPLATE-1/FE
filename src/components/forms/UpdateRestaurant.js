@@ -48,7 +48,7 @@ function UpdateRestaurant() {
     company: "",
     contact: "",
     email: "",
-    location: "",
+    password: "",
     id: "",
   });
   const { register, handleSubmit, errors } = useForm();
@@ -68,19 +68,24 @@ function UpdateRestaurant() {
 
   return (
     <div>
+      
       <Form onSubmit={handleSubmit(onSubmit)}>
+        <h2>Update Profile</h2>
+        Name
         <Fields
           type="text"
           placeholder={restaurantData.company}
           name="Company"
           ref={register({ required: true, maxLength: 80 })}
         />
+        Contact
         <Fields
           type="text"
           placeholder={restaurantData.contact}
           name="Contact"
           ref={register({ required: true, maxLength: 80 })}
         />
+        Email
         <Fields
           type="text"
           placeholder={restaurantData.email}
@@ -93,10 +98,11 @@ function UpdateRestaurant() {
         {errors.Email && (
           <Err>This Field is Required and use example@example.com format</Err>
         )}
+        Location
         <Fields
-          type="text"
-          placeholder={restaurantData.location}
-          name="Location"
+          type="password"
+          placeholder={restaurantData.password}
+          name="password"
           ref={register({ required: true, maxLength: 80 })}
         />
 
