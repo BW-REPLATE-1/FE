@@ -61,13 +61,6 @@ let Err = styled.p`
   font-size: 0.5em;
 `;
 
-// let Radios = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-// `;
-
-
-
 let SignUpForm = () => {
   const [registerState, setRegisterState] = useState({
     username: "",
@@ -76,6 +69,7 @@ let SignUpForm = () => {
       phone_number: 5554443333,
       isBusiness: true
   })  
+  
   let { register, handleSubmit, errors } = useForm();
   let onSubmit = (userData) => {
     console.log(userData);
@@ -231,7 +225,6 @@ let SignUpForm = () => {
       </label> */}
 
         <RadioContainer>
-          {/* <Radios> */}
             <label>
               <input
                 type="radio"
@@ -251,7 +244,6 @@ let SignUpForm = () => {
               Volunteer
             </label>
             {errors.isBusiness && <Err>⚠ Type of Business is Required</Err>}
-          {/* </Radios> */}
         </RadioContainer>
       </InputContainer>
       <Submit type="submit"></Submit>
