@@ -125,7 +125,7 @@ function SendJob(props) {
 					></Fields>
 				</label>
 				<label>
-					Description:
+					When:
 				<br />
 					<Fields
 						id="pickup_time"

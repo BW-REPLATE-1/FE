@@ -12,7 +12,7 @@ function Dashboard(props) {
 		password: "password11",
 		email: "iampopcorn@gmail.com",
 		phone_number: 3125559012,
-		isBusiness: false
+		isBusiness: true
 	})
 
 	console.log('dash', props)
