@@ -43,7 +43,7 @@ let Err = styled.p`
   font-size: 0.5em;
 `;
 
-let Login = () => {
+let Login = (props) => {
   let { register, handleSubmit, errors, watch } = useForm();
   let onSubmit = (userData) => {
     console.log(userData);
@@ -52,7 +52,7 @@ let Login = () => {
       .then((res) => {
 				console.log("res ", res);
 				localStorage.setItem("token", res.data.token);
-				// props.history.push("/");
+				props.history.push("/dashboard");
 			})
       .catch(err => console.log('axios login err', err))
       .finally(() => window.location.reload())
