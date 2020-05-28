@@ -2,8 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import SignUpForm from "./components/forms/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
-import UpdateRestaurant from "./components/forms/UpdateRestaurant";
-import UpdateVolunteer from "./components/forms/UpdateVolunteer";
 import Login from "./components/forms/Login";
 import PrivateRoute from "./util/PrivateRoute";
 

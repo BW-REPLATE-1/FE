@@ -3,15 +3,19 @@ import styled from 'styled-components';
 import { axiosWithAuth } from "../../util/axiosWithAuth";
 import ReceiveJob from './ReceiveJob';
 import SendJob from './SendJob';
+import UpdateRestaurant from '../forms/UpdateRestaurant';
+import UpdateVolunteer from '../forms/UpdateVolunteer';
 
-function RDashboard() {
+function Dashboard(props) {
 	const [userData, setUserData] = useState({
 		username: "iampopcorn",
 		password: "password11",
 		email: "iampopcorn@gmail.com",
 		phone_number: 3125559012,
-		isBusiness: true
+		isBusiness: false
 	})
+
+	console.log('dash', props)
 
 	// useEffect(() => {
 	// 	axiosWithAuth()
@@ -28,15 +32,21 @@ function RDashboard() {
 	return (
 		<div>
 			<h1>Hello {userData.username}</h1>
-			<p className='something'>something</p>
+			
 
 			{userData.isBusiness ? (
-				<><ReceiveJob /></>
+				<>
+				<p>Use your dashboard to update your information or submit a job</p>
+				<UpdateRestaurant userdata={userData} /><SendJob userdata={userData} />
+				</>
 			):(
-				<><SendJob /></>
+				<>
+				<p>Use your dashboard to accept a job</p>
+				<UpdateVolunteer userdata={userData} /><ReceiveJob userdata={userData} />
+				</>
 			)}
 		</div>
 	)
 }
 
-export default RDashboard;
+export default Dashboard;
