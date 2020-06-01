@@ -6,6 +6,9 @@ import SendJob from './SendJob';
 import UpdateRestaurant from '../forms/UpdateRestaurant';
 import UpdateVolunteer from '../forms/UpdateVolunteer';
 
+// Context
+import { ReplateContext } from "../contexts/ReplateContext";
+
 function Dashboard(props) {
 	const [userData, setUserData] = useState({
 		username: "iampopcorn",
@@ -37,12 +40,16 @@ function Dashboard(props) {
 			{userData.isBusiness ? (
 				<>
 				<p>Use your dashboard to update your information or submit a job</p>
-				<UpdateRestaurant userdata={userData} /><SendJob userdata={userData} />
+				<ReplateContext.Provider value={{ userData }}>
+					<UpdateRestaurant /><SendJob />
+				</ReplateContext.Provider>
 				</>
 			):(
 				<>
 				<p>Use your dashboard to accept a job</p>
-				<UpdateVolunteer userdata={userData} /><ReceiveJob userdata={userData} />
+				<ReplateContext.Provider value={{ userData }}>
+					<UpdateVolunteer /><ReceiveJob />
+				</ReplateContext.Provider>
 				</>
 			)}
 		</div>
